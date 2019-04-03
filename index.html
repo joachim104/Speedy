@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Speedy - Internet Speed Test</title>
+</head>
+
+<body>
+
+
+
+    <div class="parallax-container">
+        <div class="parallax"><img src="https://img13.deviantart.net/9480/i/2010/193/f/d/purple_btreath_by_ifreex.jpg"
+                alt="picture"></div>
+    </div>
+    <div class="section">
+        <div class="row container">
+            <h2 class="header">Speedy</h2>
+            <p>Speedtest by Speedy® is the definitive way to test the speed and performance of your internet
+                connection. Every day, over ten million unique tests are actively initiated by our users in the
+                locations and at the times when their connectivity matters to them. Since our founding in 2006, an
+                unparalleled total of more than 20 billion tests have been taken with Speedy®.</p>
+
+            <div id="test-btn">
+                <a class="waves-effect waves-light btn-large" onclick="startProgressBar(loadData())">Go</a>
+            </div>
+
+
+            <div id="myProgress">
+                <div id="myBar"></div>
+            </div>
+
+            <div class="grid-container">
+                <p class="grid-item icon-text">Upload</p>
+                <p class="grid-item icon-text">Download</p>
+                <p class="grid-item icon-text">Ping</p>
+                <i class="material-icons grid-item" id="upload-icon">cloud_upload</i>
+                <i class="material-icons grid-item" id="download-icon">cloud_download</i>
+                <i class="material-icons grid-item" id="repeat-icon">repeat</i>
+                <p class="grid-item upload"></p>
+                <p class="grid-item download"></p>
+                <p class="grid-item ping"></p>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="https://img13.deviantart.net/9480/i/2010/193/f/d/purple_btreath_by_ifreex.jpg"
+                alt="2"></div>
+    </div>
+    <div class="section">
+        <div class="row container" id="dropdown-container">
+            <h2 class="header">Details</h2>
+            <p>Here you can see more information about your internet connection. Including location of server and owner of the server responsible for your internet connection</p>
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">computer</i>Client</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li class="country-client"></li>
+                            <li class="isp"></li>
+                            <li class="ip"></li>
+                            <li class="latency"></li>
+                            <li class="isp-rating"></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">router</i>Server</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li class="country-server"></li>
+                            <li class="location"></li>
+                            <li class="sponsor"></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="https://img13.deviantart.net/9480/i/2010/193/f/d/purple_btreath_by_ifreex.jpg"
+                alt="3"></div>
+    </div>
+    <script>
+        let speedData;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.parallax');
+            var instances = M.Parallax.init(elems);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+        });
+
+        function startProgressBar(callback) {
+            var elem = document.getElementById("myBar");
+            var width = 1;
+            var id = setInterval(frame, 40);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                } else {
+                    width++;
+                    elem.style.width = width + '%';
+                }
+            }
+            return true;
+        }
+
+        function loadData() {
+            $.get("internet-speed", function (data) {
+                speedData = data;
+                setTimeout(insertData, 4000);
+            });
+        }
+
+        function insertData() {
+            // Speed
+            $(".upload").text(speedData.speeds.upload + " Mbps");
+            $(".download").text(speedData.speeds.download + " Mbps");
+            $(".ping").text(speedData.server.ping + " ms");
+
+            // Client
+            $(".country-client").text("Country: " + speedData.client.country);
+            $(".isp").text("Provider: " + speedData.client.isp);
+            $(".ip").text("IP: " + speedData.client.ip);
+            $(".isp-rating").text("ISP rating: " + speedData.client.isprating);
+
+            // Server
+            $(".country-server").text("Country: " + speedData.server.country);
+            $(".location").text("City: " + speedData.server.location);
+            $(".sponsor").text("Sponsor: " + speedData.server.sponsor);
+        }
+    </script>
+
+</body>
+
+</html>

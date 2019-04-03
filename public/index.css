@@ -1,0 +1,93 @@
+@font-face {
+    font-family: "myFirstFont";
+    src: url("/public/assets/CeraRoundPro-DEMO/TypeMates-CeraRoundPro-DEMO");
+}
+.header {
+    text-align: center;
+    font-family: 'Didact Gothic', sans-serif;
+    /* font-family: "myFirstFont"; */
+    color: purple;
+}
+
+.parallax-container {
+    height: 300px;
+  }
+
+.section {
+    background-color: #87CEEB;
+}
+
+p {
+    font-family: 'Didact Gothic', sans-serif;
+    color: purple;
+    font-size: 18px;
+}
+
+#myProgress {
+    width: 100%;
+    background-color: grey;
+}
+  
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+
+#test-btn {
+    text-align: center;
+    margin-bottom: 35px;
+    margin-top: 35px;
+}
+
+#test-btn a {
+    background-color: green;
+}
+
+#download-icon, #upload-icon, #repeat-icon {
+    font-size: 150px;
+    color: green;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+    text-align: center;
+  }
+
+.upload, .download, .ping {
+    font-size: 25px;
+    color: purple;
+}
+
+.icon-text {
+    color: purple;
+    font-size: 25px;
+    text-decoration: underline;
+}
+
+.table-item {
+    font-family: 'Didact Gothic', sans-serif;
+    color: purple;
+    font-size: 25px;
+}
+
+.tap-target {
+    background-color: purple;
+}
+
+.collapsible-header {
+    background-color: purple !important;
+    color: white !important;
+}
+
+.collapsible-body {
+    color: purple !important;
+}
+
+#dropdown-container {
+    width: 35% !important;
+}
