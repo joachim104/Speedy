@@ -1,7 +1,8 @@
 const express = require('express')
 const speedTest = require('speedtest-net');
 const app = express()
-const port = 3000
+// const port = 3000
+const port = process.env.PORT;
 const public = app.use(express.static(__dirname + '/public'));
 
 let internetSpeedData;
@@ -17,7 +18,7 @@ function TestInternetSpeed() {
 
 // Runs speedtest every 15. second 
 setInterval(function () {
-    // TestInternetSpeed();
+    TestInternetSpeed();
 }, 15000);
 
 // Sends internet speed variable to client
